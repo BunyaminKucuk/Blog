@@ -9,6 +9,6 @@ namespace DataAccessLayer.Abstract
 {
     public interface IBlogRepository : IGenericRepository<Blog>
     {
-
+        List<Blog> GetListWithCategory();
     }
 }
