@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.Abstract;
@@ -38,6 +39,11 @@ namespace DataAccessLayer.Repositories
         public T GetById(int id)
         {
             return _context.Set<T>().Find(id);
+        }
+
+        public List<T> GetListAll(Expression<Func<T, bool>> filter)
+        {
+            return _context.Set<T>().Where(filter).ToList();
         }
     }
 }

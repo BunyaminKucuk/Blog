@@ -13,7 +13,7 @@ namespace BusinessLayer.Concrete
 {
     public class CategoryManager : ICategoryService
     {
-        ICategoryRepository _categoryRepository;
+         readonly ICategoryRepository _categoryRepository;
 
         public CategoryManager(ICategoryRepository categoryRepository)
         {
