@@ -20,7 +20,6 @@ namespace BusinessLayer.Concrete
         }
         public void CommentAdd(Comment comment)
         {
-            _commentRepository.Insert(comment);
         }
 
         public List<Comment> GetList(int id)
