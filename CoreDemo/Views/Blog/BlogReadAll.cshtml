@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EntityLayer.Concrete.Blog>
+@model IEnumerable<EntityLayer.Concrete.Blog>
 
 @{
     ViewData["Title"] = "BlogDetails";
@@ -55,6 +55,9 @@
                             <a href="/Blog/Index" class="btn btn-primary read-m">Blog Listesi</a>
                         </div>
                     }
+
+
+                    @await Component.InvokeAsync("CommentListByBlog",new {id=ViewBag.i})
                     @await Html.PartialAsync("~/Views/Comment/PartialAddComment.cshtml")
 
                 </div>
@@ -74,7 +77,21 @@
                                 <input type="submit" value="Subscribe">
                             </form>
 
+                        </div>
+
                         @await Component.InvokeAsync("CategoryList")
+
+
+                        <div class="tech-btm">
+                            <h4>Yazarın Diğer Yazıları</h4>
+
+                            <div class="blog-grids row mb-3">
+                                <div class="col-md-5 blog-grid-left">
+                                    <a href="single.html">
+                                        <img src="~/CoreBlogTema/web/images/1.jpg" class="img-fluid" alt="">
+                                    </a>
+                                </div>
+                                <div class="col-md-7 blog-grid-right">
 
                                     <h5>
                                         <a href="single.html">Pellentesque dui, non felis. Maecenas male non felis </a>

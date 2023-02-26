@@ -15,12 +15,12 @@ namespace CoreDemo.Controllers
             return View();
         }
 
+
         [HttpGet]
         public PartialViewResult PartialAddComment()
         {
             return PartialView();
         }
-
         [HttpPost]
         public PartialViewResult PartialAddComment(Comment comment)
         {
@@ -34,6 +34,11 @@ namespace CoreDemo.Controllers
         public PartialViewResult CommentListByBlog(int id)
         {
             return PartialView(values);
+        }
+
+        public PartialViewResult CommentListByBlog()
+        {
+            return PartialView();
         }
     }
 }
