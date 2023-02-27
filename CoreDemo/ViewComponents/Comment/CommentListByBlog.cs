@@ -6,7 +6,6 @@ namespace CoreDemo.ViewComponents.Comment
 {
     public class CommentListByBlog : ViewComponent
     {
-        CommnetManager _commnetManager = new CommnetManager(new EfCommentRepository());
 
         public IViewComponentResult Invoke(int id)
         {

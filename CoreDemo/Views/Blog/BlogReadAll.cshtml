@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EntityLayer.Concrete.Blog>
+@model IEnumerable<EntityLayer.Concrete.Blog>
 
 @{
     ViewData["Title"] = "BlogDetails";
@@ -57,8 +57,7 @@
                     }
 
 
-                    @*@await Component.InvokeAsync("CommentListByBlog",new {id=ViewBag.i})*@
-                    @*@await Html.PartialAsync("~/Views/Comment/CommentListByBlog.cshtml")*@
+                    @await Component.InvokeAsync("CommentListByBlog",new {id=ViewBag.i})
                     @await Html.PartialAsync("~/Views/Comment/PartialAddComment.cshtml")
 
                 </div>
