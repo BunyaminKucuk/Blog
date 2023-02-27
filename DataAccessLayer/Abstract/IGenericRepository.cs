@@ -15,5 +15,6 @@ namespace DataAccessLayer.Abstract
         List<T> GetListAll();
         T GetById(int id);
         List<T> GetListAll(Expression<Func<T, bool>> filter);
+
     }
 }
