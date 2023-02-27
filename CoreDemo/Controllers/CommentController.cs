@@ -33,6 +33,7 @@ namespace CoreDemo.Controllers
 
         public PartialViewResult CommentListByBlog(int id)
         {
+            var values = _commnetManager.GetList(id);
             return PartialView(values);
         }
 
