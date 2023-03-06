@@ -1,17 +1,15 @@
-﻿using System;
+﻿using DataAccessLayer.Abstract;
+using DataAccessLayer.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using DataAccessLayer.Abstract;
-using DataAccessLayer.Concrete;
 
 namespace DataAccessLayer.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private Context _context = new Context();
+        private readonly Context _context = new Context();
 
         public void Insert(T t)
         {
@@ -41,7 +39,7 @@ namespace DataAccessLayer.Repositories
             return _context.Set<T>().Find(id);
         }
 
-        public List<T> GetListAll(Expression<Func<T, bool>> filter)
+        public List<T> GetListAllByFilter(Expression<Func<T, bool>> filter)
         {
             return _context.Set<T>().Where(filter).ToList();
         }

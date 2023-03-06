@@ -6,7 +6,7 @@ namespace CoreDemo.ViewComponents.Blog
 {
 	public class WriterLastBlog : ViewComponent
 	{
-		private BlogManager _blogManager = new BlogManager(new EfBlogRepository());
+		private readonly BlogManager _blogManager = new BlogManager(new EfBlogRepository());
 
 		public IViewComponentResult Invoke()
 		{

@@ -20,13 +20,13 @@ namespace CoreDemo.Controllers
         [HttpPost]
         public IActionResult Index(Writer writer)
         {
-            WriterValidation writerValidation = new WriterValidation();
+            WriterValidator writerValidation = new WriterValidator();
             ValidationResult result = writerValidation.Validate(writer);
             if (result.IsValid)
             {
                 writer.WriterStatus = true;
                 writer.WriterAbout = "Deneme Test";
-                writerManager.WriteAdd(writer);
+                writerManager.TAdd(writer);
                 return RedirectToAction("Index", "Blog");
             }
             else

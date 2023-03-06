@@ -1,0 +1,64 @@
+﻿@using EntityLayer.Concrete
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<Category>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/_AdminLayout.cshtml";
+}
+
+<h1>Kategory Listesi</h1>
+<br />
+<table class="table table-bordered">
+    <tr style="text-align: center">
+        <th>Kategory Adı</th>
+        <th>Pasif Yap</th>
+        <th>Aktif Yap</th>
+        <th>Sil</th>
+        <th>Düzenle</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>@item.CategoryName</td>
+            <td style="text-align: center"><a href="#" class="fa fa-bell-slash btn-danger"></a></td>
+
+            <td style="text-align: center"><a href="#" class="fa fa-bell btn-success"></a></td>
+            <td style="text-align: center">
+
+                <!--Sil modal Butonu-->
+                <a type="button" class="text-danger fa fa-trash" data-toggle="modal" data-target="#Sil_@item.CategoryId"></a>
+                <!--Modal-->
+                <div class="modal fade" id="Sil_@item.CategoryId" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Kategori Sil</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h4>Kategoriyi silmek istiyor musunuz?</h4>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-info mx-4" data-dismiss="modal">Vazgeç</button>
+                                @Html.ActionLink("Sil", "CategoryDelete", new { id = @item.CategoryId }, new { @class = "btn btn-danger mx-4" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td style="text-align: center"><a href="Category/CategoryEdit/@item.CategoryId" class="fa fa-edit btn-warning"></a></td>
+        </tr>
+    }
+</table>
+
+<a href="/Admin/Category/AddCategory" class="btn btn-primary">Kategoryi Ekle</a>
+<br />
+<br />
+@Html.PagedListPager((IPagedList)Model,page=>Url.Action("Index",new{page}))
+
+

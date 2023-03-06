@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessLayer.Abstract;
+﻿using BusinessLayer.Abstract;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
+using System;
+using System.Collections.Generic;
 
 namespace BusinessLayer.Concrete
 {
@@ -18,9 +15,29 @@ namespace BusinessLayer.Concrete
             _contactRepository = contactRepository;
         }
 
-        public void ContactAdd(Contact contact)
+        public List<Contact> GetList()
         {
-            _contactRepository.Insert(contact);
+            return _contactRepository.GetListAll();
+        }
+
+        public void TAdd(Contact t)
+        {
+            _contactRepository.Insert(t);
+        }
+
+        public void TDelete(Contact t)
+        {
+            _contactRepository.Delete(t);
+        }
+
+        public Contact TGetByID(int id)
+        {
+            return _contactRepository.GetById(id);
+        }
+
+        public void TUpdate(Contact t)
+        {
+            _contactRepository.Update(t);
         }
     }
 }

@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EntityLayer.Concrete;
+﻿using EntityLayer.Concrete;
 using FluentValidation;
 
 namespace BusinessLayer.ValidationRules
 {
-    public class WriterValidation : AbstractValidator<Writer>
+    public class WriterValidator : AbstractValidator<Writer>
     {
-        public WriterValidation()
+        public WriterValidator()
         {
             RuleFor(x => x.WriterName).NotEmpty().WithMessage("Yazar adı ve soyadı kısmı boş geçilemez");
             RuleFor(x => x.WriterMail).NotEmpty().WithMessage("Mail adresi boş geçilemez");

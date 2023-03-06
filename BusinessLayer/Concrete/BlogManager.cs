@@ -1,36 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessLayer.Abstract;
+﻿using BusinessLayer.Abstract;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessLayer.Concrete
 {
     public class BlogManager : IBlogService
     {
-        private IBlogRepository _blogRepository;
+        private readonly IBlogRepository _blogRepository;
 
         public BlogManager(IBlogRepository blogRepository)
         {
             _blogRepository = blogRepository;
         }
 
-        public void CategoryAdd(Blog blog)
+        #region Method
+
+        public void TAdd(Blog t)
         {
-            throw new NotImplementedException();
+            _blogRepository.Insert(t);
         }
 
-        public void CategoryUpdate(Blog blog)
+        public void TUpdate(Blog t)
         {
-            throw new NotImplementedException();
+            _blogRepository.Update(t);
         }
 
-        public void CategoryDelete(Blog blog)
+        public void TDelete(Blog t)
         {
-            throw new NotImplementedException();
+            _blogRepository.Delete(t);
         }
 
         public List<Blog> GetList()
@@ -38,23 +37,38 @@ namespace BusinessLayer.Concrete
             return _blogRepository.GetListAll();
         }
 
-        public Blog GetById(int id)
+        public Blog TGetByID(int id)
         {
-            throw new NotImplementedException();
+            return _blogRepository.GetById(id);
+        }
+
+        public List<Blog> GetLastTreeBlog()
+        {
+            return _blogRepository.GetListAll().Take(3).ToList();
         }
 
         public List<Blog> GetBlogById(int id)
         {
-            return _blogRepository.GetListAll(x => x.BlogId == id);
+            return _blogRepository.GetListAllByFilter(x => x.BlogId == id);
         }
 
         public List<Blog> GetBlogListWithCategory()
         {
             return _blogRepository.GetListWithCategory();
         }
-		  public List<Blog> GetBlogListByWriter(int id)
-		{
-			return _blogRepository.GetListAll(x => x.WriterId == id);
-		}
+
+        public List<Blog> GetBlogListByWriter(int id)
+        {
+            return _blogRepository.GetListAllByFilter(x => x.WriterId == id);
+        }
+
+        public List<Blog> GetListWithCategoryByWriter(int id)
+        {
+            return _blogRepository.GetListWithCategoryByWriter(id);
+        }
+
+
+        #endregion
+
     }
 }

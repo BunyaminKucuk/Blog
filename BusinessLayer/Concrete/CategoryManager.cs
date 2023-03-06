@@ -1,37 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BusinessLayer.Abstract;
+﻿using BusinessLayer.Abstract;
 using DataAccessLayer.Abstract;
-using DataAccessLayer.EntityFramework;
-using DataAccessLayer.Repositories;
 using EntityLayer.Concrete;
+using System.Collections.Generic;
 
 namespace BusinessLayer.Concrete
 {
     public class CategoryManager : ICategoryService
     {
-         readonly ICategoryRepository _categoryRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
         public CategoryManager(ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository;
-        }
-        public void CategoryAdd(Category category)
-        {
-            _categoryRepository.Insert(category);
-        }
-
-        public void CategoryUpdate(Category category)
-        {
-            _categoryRepository.Update(category);
-        }
-
-        public void CategoryDelete(Category category)
-        {
-            _categoryRepository.Delete(category);
         }
 
         public List<Category> GetList()
@@ -39,9 +19,24 @@ namespace BusinessLayer.Concrete
             return _categoryRepository.GetListAll();
         }
 
-        public Category GetById(int id)
+        public Category TGetByID(int id)
         {
             return _categoryRepository.GetById(id);
+        }
+
+        public void TAdd(Category t)
+        {
+            _categoryRepository.Insert(t);
+        }
+
+        public void TUpdate(Category t)
+        {
+            _categoryRepository.Update(t);
+        }
+
+        public void TDelete(Category t)
+        {
+            _categoryRepository.Delete(t);
         }
     }
 }

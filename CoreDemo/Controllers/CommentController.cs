@@ -27,13 +27,13 @@ namespace CoreDemo.Controllers
             comment.CommentDate = DateTime.Parse(DateTime.Now.ToShortDateString());
             comment.CommentStatus = true;
             comment.BlogId = 1;
-            _commnetManager.CommentAdd(comment);
+            _commnetManager.TAdd(comment);
             return PartialView();
         }
 
         public PartialViewResult CommentListByBlog(int id)
         {
-            var values = _commnetManager.GetList(id);
+            var values = _commnetManager.GetBlogById(id);
             return PartialView(values);
         }
 

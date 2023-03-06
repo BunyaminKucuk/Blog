@@ -9,7 +9,7 @@ namespace CoreDemo.ViewComponents.Comment
         private readonly CommnetManager _commnetManager = new CommnetManager(new EfCommentRepository());
         public IViewComponentResult Invoke(int id)
         {
-            var values = _commnetManager.GetList(id);
+            var values = _commnetManager.GetBlogById(id);
             return View(values);
         }
     }

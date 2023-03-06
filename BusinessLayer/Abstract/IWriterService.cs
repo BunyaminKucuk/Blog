@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
 
 namespace BusinessLayer.Abstract
 {
-    public interface IWriterService
+    public interface IWriterService : IGenericService<Writer>
     {
-        void WriteAdd(Writer writer); 
+        List<Writer> GetWriterById(int id);
     }
 }
