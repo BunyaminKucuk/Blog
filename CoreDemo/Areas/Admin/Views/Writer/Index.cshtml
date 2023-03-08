@@ -1,0 +1,115 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/_AdminLayout.cshtml";
+}
+
+<h1>Yazar Ajax İşlmeleri</h1>
+<br />
+<div id="writerList"></div>
+<br />
+<div id="writerget"></div>
+<br />
+<div>
+    <input type="text" id="writerId" placeholder="Yazar Id değerini girin" class="form-control" />
+</div>
+<br />
+<div id="writerget">
+    <input type="text" class="form-control" id="txtWriterId" placeholder="Yazar Id" />
+    <input type="text" class="form-control" id="txtWriterName" placeholder="Yazar Adı" />
+</div>
+<br />
+<div>
+    <input type="text" class="form-control" id="txtId" placeholder="Silinecek Yazar Id" />
+</div>
+<br />
+<div>
+    <input type="text" class="form-control" id="txtUpdateId" placeholder="Güncellenecek Yazar Id" />
+    <input type="text" class="form-control" id="txtUpdateName" placeholder="Güncellenecek Yazar İsmi" />
+</div>
+<button type="button" id="btngetlist" class="btn btn-outline-primary">Yazar Listesi</button>
+<button type="button" id="btngetbyid" class="btn btn-outline-success">Yazar Getir</button>
+<button type="button" id="btnaddwriter" class="btn btn-outline-info">Yazar Ekle</button>
+<button type="button" id="btndeletewriter" class="btn btn-outline-danger">Yazar Sil</button>
+<button type="button" id="btnupdatewriter" class="btn btn-outline-warning">Yazar Güncelle</button>
+
+@section scripts{
+    <script>
+        $("#btngetlist").click(function () {
+            $.ajax({
+                contentType: "application/json",
+                dataType: "json",
+                type: "Get",
+                url: "/Admin/Writer/WriterList",
+                success: function (func) {
+                    let writers = jQuery.parseJSON(func);
+                    let tablehtml = "<h3>Yazar Listesi</h3><table class=table table-bordered> <tr> <th>Yazar </th>  <th>Yazar Adı </th></tr>";
+                    $.each(writers, (index, value) => {
+                        tablehtml += `<tr><td>${value.Id}</td> <td>${value.Name}</td></tr>`
+                    });
+                    tablehtml += "</table>";
+                    $("#writerList").html(tablehtml);
+                }
+            });
+        });
+
+        $("#btngetbyid").click(x => {
+            let id = $("#writerId").val();
+            $.ajax({
+                contentType: "application/json",
+                dataType: "json",
+                type: "get",
+                url: "/Admin/Writer/GetWriterById",
+                data: { writerId: id },
+                success: function (func) {
+                    let writers = jQuery.parseJSON(func);
+                    var getValue = `<h3>Filtrelediğiniz Yazar Bilgisi</h3><table class=table table-bordered><tr><td>Yazar Id</td><td>Yazar Adı</td></tr><tr><td>${writers.Id} </td><td>${writers.Name} </td></tr></table>`;
+                    $("#writerget").html(getValue);
+                }
+            });
+        });
+
+        $("#btnaddwriter").click(function () {
+            let writer = {
+                Id: $("#txtWriterId").val(),
+                Name: $("#txtWriterName").val()
+            };
+            $.ajax({
+                type: "post",
+                url: "/Admin/Writer/AddWriter",
+                data: writer,
+                success: function (func) {
+                    let result = jQuery.parseJSON(func);
+                    alert("Yazar Ekleme İşlemi Başarılı Bir Şekilde Gerçekleşti");
+                }
+            })
+        })
+
+        $("#btndeletewriter").click(x => {
+            let id = $("#txtId").val();
+            $.ajax({
+                url: "/Admin/Writer/DeleteWriter/" + id,
+                type: "post",
+                dataType: "json",
+                success: function (func) {
+                    alert("Yazar Silme İşlemi Başarılı Bir Şekilde Gerçekleşti");
+                }
+            })
+        })
+
+        $("#btnupdatewriter").click(function () {
+            let writer = {
+                Id: $("#txtUpdateId").val(),
+                Name: $("#txtUpdateName").val()
+            };
+            $.ajax({
+                type: "post",
+                url: "/Admin/Writer/UpdateWriter",
+                data: writer,
+                success: function (func) {
+                    alert("Yazar Gümcelleme İşlemi Başarılı Bir Şekilde Gerçekleşti");
+                }
+            })
+        })
+
+    </script>
+}
